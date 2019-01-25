@@ -2,3 +2,4 @@ node_modules
 training_data
 *.js
 *.map.js
+env.json

@@ -1,4 +1,4 @@
-Verfy is an experimental app to replace your username-password login system with a biometric system.
+Verfy is an experimental app to replace your username-password login system with a biometric one.
 Verfy allows you to login without typing any username and password instead processing the spoken keyword.
 
 There are 2 authentication steps:
