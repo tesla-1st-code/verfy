@@ -30,5 +30,5 @@ app.listen(ENV["server_port"], err => {
         return;
     }
 
-    console.log(`Socpred server is running on ${ENV["server_port"]}`);
+    console.log(`Verfy server is running on ${ENV["server_port"]}`);
 });
