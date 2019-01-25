@@ -1,3 +1,33 @@
-<p>
-  home works!
-</p>
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">
+    <span style="color: white;"> Verfy </span> 
+  </a>
+</nav>
+<div class="container d-flex justify-content-center mt-5">
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 10px;">
+      <div class="card bg-primary text-center">
+          <div class="card-body text-white">
+            <p>Test your voice to be verified by system.</p>
+            <button class="btn btn-default" style="margin-bottom: 5px;" (click)="isVerifying ? stop('verifying') : record('verifying')">{{isVerifying ? 'Stop' : 'Record'}}</button>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card bg-primary text-center">
+        <div class="card-body text-white">
+          <p>Register your voice to be trained by system.</p>
+          <p>Record your voice saying your keyword 10 times.</p>
+          <input type="text" class="form-control" name="name" [(ngModel)]="name" placeholder="Type your name" style="width: 80%; margin: 0 auto; margin-bottom: 10px;">
+          <input type="text" class="form-control" name="keyword" [(ngModel)]="keyword" placeholder="Type your keyword" style="width: 80%; margin: 0 auto; margin-bottom: 10px;">
+          <button class="btn btn-default" style="margin-bottom: 5px;" (click)="isTraining ? stop('training') : record('training')">{{isTraining ? 'Stop' : 'Record'}}</button>
+           &nbsp;
+          <button class="btn btn-default" style="margin-bottom: 5px;" (click)="save()">Save</button>
+          <div *ngFor="let td of trainingData; let i = index">
+            Training data {{i + 1}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

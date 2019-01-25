@@ -32,3 +32,7 @@ app.listen(ENV["server_port"], err => {
 
     console.log(`Verfy server is running on ${ENV["server_port"]}`);
 });
+
+app.get('/api', (req, res) => {
+    res.send('Hello');
+})

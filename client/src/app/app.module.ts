@@ -5,18 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ProgressHttpModule } from 'angular-progress-http';
 
+import { SharedService } from './shared.service';
+import { DataService } from './data.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    RegisterComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +25,7 @@ import { LoginComponent } from './login/login.component';
     HttpModule,
     ProgressHttpModule
   ],
-  providers: [],
+  providers: [SharedService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
