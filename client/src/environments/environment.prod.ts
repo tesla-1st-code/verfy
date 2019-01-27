@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  serverUrl: 'api.vailabs.com/verfy'
+  serverUrl: 'http://api.vailabs.com/verfy'
 };
