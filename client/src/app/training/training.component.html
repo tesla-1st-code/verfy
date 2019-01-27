@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row align-items-center">
+      <div class="col-12  mx-auto text-center text-white">
+          <h1 class="my-3 display-4 d-none d-lg-inline-block">Training</h1>
+          <br>
+          <span class="lead mb-3" style="font-size: 16px;">
+            Please record your voice saying "Hello" and your chosen keyword 10 times.
+          </span>
+          <br>
+          <button class="btn btn-sm btn-success" (click)="save()">Train</button>
+      </div>
+      <div class="col-6 mx-auto mt-3">
+        <div class="card">
+          <div class="card-header">
+            <span>Record your "Hello"</span>
+          </div>
+          <div class="card-body">
+              <input type="text" placeholder="Type your name" [(ngModel)]="name" class="form-control form-control-sm mb-2" name="name">
+              <button class="btn btn-sm" (click)="isRecording ? stop() : start('user')">{{isRecording && state === 'user' ? 'Stop' : 'Record'}}</button>
+             
+              <table class="table table-sm table-condensed bg-default">
+                  <thead>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Length</th>
+                    <th class="text-center">Action</th>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let data of users; let i = index;">
+                       <td>{{data.name}}</td>
+                       <td>{{data.length}}</td>
+                       <td class="text-center">
+                         <button class="btn btn-sm btn-primary" (click)="playback(data.audioUrl)">
+                            Playback
+                         </button>
+                         &nbsp;
+                         <button class="btn btn-sm btn-danger" (click)="delete('user', i)">
+                           Delete
+                         </button>
+                       </td>
+                     </tr>
+                  </tbody>
+              </table>
+          </div>
+        </div> 
+      </div>
+      <div class="col-6 mx-auto mt-3">
+          <div class="card">
+            <div class="card-header">
+              <span>Record your keyword</span>
+            </div>
+            <div class="card-body">
+                <input type="text" placeholder="Type your keyword" [(ngModel)]="keyword" class="form-control form-control-sm mb-2" name="keyword">
+                <button class="btn btn-sm" (click)="isRecording ? stop() : start('keyword')">{{isRecording && state === 'keyword' ? 'Stop' : 'Record'}}</button>
+                <table class="table table-sm table-condensed bg-default">
+                    <thead>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Length</th>
+                      <th class="text-center">Action</th>
+                    </thead>
+                    <tbody>
+                       <tr *ngFor="let data of keywords; let i = index;">
+                         <td>{{data.name}}</td>
+                         <td>{{data.length}}</td>
+                         <td class="text-center">
+                           <button class="btn btn-sm btn-primary" (click)="playback(data.audioUrl)">
+                              Playback
+                           </button>
+                           &nbsp;
+                           <button class="btn btn-sm btn-danger" (click)="delete('keyword', i)">
+                             Delete
+                           </button>
+                         </td>
+                       </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div> 
+      </div>
+  </div>
+</div>

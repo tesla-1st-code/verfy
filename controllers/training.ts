@@ -4,11 +4,12 @@ import {framer, mfcc} from 'sound-parameters-extractor';
 import * as kmeans from 'ml-kmeans';
 import * as fft from 'fft-js';
 import * as fs from 'fs';
+import * as _ from 'lodash';
 
 const config = {
   fftSize: 32,
   bankCount: 24,
-  lowFrequency: 1,
+  lowFrequency: 133.3333,
   highFrequency: 8000, // samplerate/2 here
   sampleRate: 16000
 };
@@ -21,17 +22,33 @@ const ROOT = './training_data';
 export class TrainingController {
     constructor() {}
 
-    @Get('/test')
-    async test() {
-        return {message: 'hello'};
-    }
-
     @Post("/extract")
     async extract(@Body() data: any) {
+        const userFeatures = this.train(data.users);
+        const keywordFeatures = this.train(data.keywords);
+
+        const userPath = ROOT + '/users';
+        const keywordPath = ROOT + '/keywords';
+
+        if (!fs.existsSync(userPath)) {
+            fs.mkdirSync(userPath);
+        }
+
+        if (!fs.existsSync(keywordPath)) {
+            fs.mkdirSync(keywordPath);
+        }
+
+        fs.writeFileSync(userPath + '/' + data.name + '.json', JSON.stringify(userFeatures.centroids));
+        fs.writeFileSync(keywordPath + '/' + data.name + '_' + data.keyword + '.json', JSON.stringify(keywordFeatures.centroids));
+
+        return {status: 'ok'};
+    }
+
+    private train(data): any {
         let mfccs = [];
 
-        for (let i=0; i<data.audio.length; i++) {
-            const signal = data.audio[i];
+        for (let i=0; i<data.length; i++) {
+            const signal = data[i];
             const windowSize = config.fftSize * 2;
             const overlap = '50%';
             const mfccSize = MFCC_LENGTH;
@@ -44,7 +61,8 @@ export class TrainingController {
             
             mfccs = mfccs.concat(mfccSignal);
         }
-        
+
+   
         let centers = [];
 
         for (let i=0; i<K; i++) {
@@ -57,16 +75,6 @@ export class TrainingController {
             centers.push(center);
         }
        
-        let ans = kmeans(mfccs, 8, { initialization: centers });
-
-        const path = ROOT + '/' + data.name;
-
-        if (!fs.existsSync(path)) {
-            fs.mkdirSync(path);
-        }
-
-        fs.writeFileSync(path + '/' + data.keyword + '.json', JSON.stringify(ans.centroids));
-
-        return {status: 'ok'};
+        return kmeans(mfccs, K, { initialization: centers });
     }
 }

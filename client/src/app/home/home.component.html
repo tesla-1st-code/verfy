@@ -1,33 +1,13 @@
-<nav class="navbar navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">
-    <span style="color: white;"> Verfy </span> 
-  </a>
-</nav>
-<div class="container d-flex justify-content-center mt-5">
-  <div class="row">
-    <div class="col-md-12" style="margin-bottom: 10px;">
-      <div class="card bg-primary text-center">
-          <div class="card-body text-white">
-            <p>Test your voice to be verified by system.</p>
-            <button class="btn btn-default" style="margin-bottom: 5px;" (click)="isVerifying ? stop('verifying') : record('verifying')">{{isVerifying ? 'Stop' : 'Record'}}</button>
-          </div>
+<div class="container">
+  <div class="row align-items-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto text-center text-white">
+          <h1 class="my-3 display-4 d-none d-lg-inline-block">Verfy</h1>
+          <span class="h1 my-3 d-inline-block d-lg-none">Verfy</span>
+          <p class="lead mb-3" style="font-size: 16px;">Verfy is an experimental biometric login system to replace username-password authentication schema. 
+            You can start to give verfy some knowlegdes about your voice.
+            <a href="#" [routerLink]="['/training']" style="color: #cacacc"> Click here to train</a> or
+            <a href="#" [routerLink]="['/login']" style="color: #cacacc"> Click here to login</a>
+          </p>
       </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card bg-primary text-center">
-        <div class="card-body text-white">
-          <p>Register your voice to be trained by system.</p>
-          <p>Record your voice saying your keyword 10 times.</p>
-          <input type="text" class="form-control" name="name" [(ngModel)]="name" placeholder="Type your name" style="width: 80%; margin: 0 auto; margin-bottom: 10px;">
-          <input type="text" class="form-control" name="keyword" [(ngModel)]="keyword" placeholder="Type your keyword" style="width: 80%; margin: 0 auto; margin-bottom: 10px;">
-          <button class="btn btn-default" style="margin-bottom: 5px;" (click)="isTraining ? stop('training') : record('training')">{{isTraining ? 'Stop' : 'Record'}}</button>
-           &nbsp;
-          <button class="btn btn-default" style="margin-bottom: 5px;" (click)="save()">Save</button>
-          <div *ngFor="let td of trainingData; let i = index">
-            Training data {{i + 1}}
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
