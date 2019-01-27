@@ -20,7 +20,6 @@
     "fft-js": "0.0.11",
     "lodash": "^4.17.11",
     "ml-kmeans": "^4.2.1",
-    "mongoose": "^5.4.6",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.7.7",
     "sound-parameters-extractor": "^1.4.0"
